@@ -12,7 +12,6 @@ from pathlib import Path
 import fitz
 from reportlab.lib.colors import HexColor
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.pdfmetrics import Font
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
@@ -58,21 +57,20 @@ def configure_market(data: dict[str, object]) -> None:
 def register_fonts() -> None:
     font_root = Path(__file__).resolve().parent / "fonts"
     fonts = (
-        ("Display", Path("/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf"), "Helvetica-Bold"),
-        ("Body", Path("/System/Library/Fonts/Supplemental/Arial.ttf"), "Helvetica"),
-        ("BodyBold", Path("/System/Library/Fonts/Supplemental/Arial Bold.ttf"), "Helvetica-Bold"),
-        ("Mono", Path("/System/Library/Fonts/SFNSMono.ttf"), "Courier"),
-        ("Currency", font_root / "DejaVuSans.ttf", "Helvetica"),
-        ("CurrencyBold", font_root / "DejaVuSans-Bold.ttf", "Helvetica-Bold"),
-        ("CurrencyMono", font_root / "DejaVuSansMono.ttf", "Courier"),
+        ("Display", font_root / "DejaVuSans-Bold.ttf"),
+        ("Body", font_root / "DejaVuSans.ttf"),
+        ("BodyBold", font_root / "DejaVuSans-Bold.ttf"),
+        ("Mono", font_root / "DejaVuSansMono.ttf"),
+        ("Currency", font_root / "DejaVuSans.ttf"),
+        ("CurrencyBold", font_root / "DejaVuSans-Bold.ttf"),
+        ("CurrencyMono", font_root / "DejaVuSansMono.ttf"),
     )
-    for alias, path, fallback in fonts:
+    for alias, path in fonts:
         if alias in pdfmetrics.getRegisteredFontNames():
             continue
-        try:
-            pdfmetrics.registerFont(TTFont(alias, path))
-        except OSError:
-            pdfmetrics.registerFont(Font(alias, fallback, "WinAnsiEncoding"))
+        if not path.is_file():
+            raise FileNotFoundError(f"Bundled font is unavailable: {path}")
+        pdfmetrics.registerFont(TTFont(alias, str(path)))
 
 
 def text_font(preferred: str, text: str) -> str:

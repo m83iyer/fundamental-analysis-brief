@@ -8,7 +8,9 @@ import fitz
 import pandas as pd
 import pytest
 from PIL import Image
+from reportlab.pdfbase import pdfmetrics
 
+import fundamental_analysis.render as render_module
 from fundamental_analysis.analysis import analyze_fundamentals, normalize_statements
 from fundamental_analysis.market import DISCLAIMER, compact_money, resolve_security
 from fundamental_analysis.render import EXPORT_H, EXPORT_W, PAGE_H, PAGE_W, render
@@ -104,6 +106,16 @@ def test_currency_formatting_does_not_leak_markets() -> None:
     assert DISCLAIMER == "Research output — not a recommendation. The reader decides whether to act."
     assert compact_money(1_500_000_000_000, "INR") == "₹1.50 lakh cr"
     assert compact_money(1_500_000_000_000, "USD") == "$1.50T"
+
+
+def test_renderer_fonts_are_bundled_and_cross_platform() -> None:
+    font_root = (Path(render_module.__file__).resolve().parent / "fonts").resolve()
+    expected = {"DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "DejaVuSansMono.ttf"}
+    assert expected <= {path.name for path in font_root.iterdir() if path.is_file()}
+    render_module.register_fonts()
+    for alias in ("Display", "Body", "BodyBold", "Mono", "Currency", "CurrencyBold", "CurrencyMono"):
+        registered = Path(pdfmetrics.getFont(alias).face.filename).resolve()
+        assert registered.is_relative_to(font_root)
 
 
 def test_statement_normalization_accepts_four_comparable_years() -> None:
