@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fundamental-analysis-brief"
+version = "0.1.0"
+description = "Refusal-first one-page fundamental analysis for US and Indian equities"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "stockcentric" }]
+dependencies = [
+  "pandas>=2.2,<4",
+  "yfinance>=0.2.66,<2",
+  "reportlab>=4.2,<5",
+  "PyMuPDF>=1.24,<2",
+  "Pillow>=10,<13",
+]
+
+[project.scripts]
+fundamental-brief = "fundamental_analysis.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["fundamental_analysis*"]
+
+[tool.setuptools.package-data]
+fundamental_analysis = [
+  "fonts/*.ttf",
+  "fonts/LICENSE_DEJAVU",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
