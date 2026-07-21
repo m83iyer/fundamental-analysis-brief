@@ -12,6 +12,7 @@ from reportlab.pdfbase import pdfmetrics
 
 import fundamental_analysis.render as render_module
 from fundamental_analysis.analysis import analyze_fundamentals, normalize_statements
+from fundamental_analysis.cli import _clear_previous_failure, _clear_previous_success
 from fundamental_analysis.market import DISCLAIMER, compact_money, resolve_security
 from fundamental_analysis.render import EXPORT_H, EXPORT_W, PAGE_H, PAGE_W, render
 
@@ -116,6 +117,30 @@ def test_renderer_fonts_are_bundled_and_cross_platform() -> None:
     for alias in ("Display", "Body", "BodyBold", "Mono", "Currency", "CurrencyBold", "CurrencyMono"):
         registered = Path(pdfmetrics.getFont(alias).face.filename).resolve()
         assert registered.is_relative_to(font_root)
+
+
+def test_output_directory_cannot_mix_success_and_failure_states(tmp_path: Path) -> None:
+    receipt = tmp_path / "failure-receipt.json"
+    receipt.write_text("{}", encoding="utf-8")
+    _clear_previous_failure(tmp_path)
+    assert not receipt.exists()
+
+    successful = (
+        tmp_path / "source-input.json",
+        tmp_path / "fundamental-evidence.json",
+        tmp_path / "market-history.json",
+        tmp_path / "TEST-fundamental-brief.pdf",
+        tmp_path / "TEST-fundamental-brief.png",
+    )
+    for path in successful:
+        path.write_text("stale", encoding="utf-8")
+    receipt.write_text("current failure", encoding="utf-8")
+    unrelated = tmp_path / "notes.txt"
+    unrelated.write_text("keep", encoding="utf-8")
+    _clear_previous_success(tmp_path)
+    assert all(not path.exists() for path in successful)
+    assert receipt.is_file()
+    assert unrelated.is_file()
 
 
 def test_statement_normalization_accepts_four_comparable_years() -> None:

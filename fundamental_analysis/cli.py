@@ -16,6 +16,23 @@ def _write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def _clear_previous_failure(output_dir: Path) -> None:
+    receipt = output_dir / "failure-receipt.json"
+    if receipt.is_file():
+        receipt.unlink()
+
+
+def _clear_previous_success(output_dir: Path) -> None:
+    for name in ("source-input.json", "fundamental-evidence.json", "market-history.json"):
+        path = output_dir / name
+        if path.is_file():
+            path.unlink()
+    for pattern in ("*-fundamental-brief.pdf", "*-fundamental-brief.png"):
+        for path in output_dir.glob(pattern):
+            if path.is_file():
+                path.unlink()
+
+
 def run(
     *,
     ticker: str,
@@ -47,6 +64,7 @@ def run(
         png_path,
         str(snapshot["fetched_at"]).replace("T", " ")[:16] + " UTC",
     )
+    _clear_previous_failure(output_dir)
     return {
         "ticker": security.canonical_ticker,
         "market": security.profile.code,
@@ -75,13 +93,15 @@ def main() -> int:
             input_bundle=args.input_bundle.resolve() if args.input_bundle else None,
         )
     except (ValueError, KeyError, IndexError) as error:
+        output_dir = args.out.resolve()
+        _clear_previous_success(output_dir)
         receipt = {
             "ticker": args.ticker.upper(),
             "market": args.market,
             "status": "insufficient_evidence",
             "reason": str(error),
         }
-        _write_json(args.out.resolve() / "failure-receipt.json", receipt)
+        _write_json(output_dir / "failure-receipt.json", receipt)
         print(json.dumps(receipt, sort_keys=True))
         return 2
     print(json.dumps(result, sort_keys=True))
