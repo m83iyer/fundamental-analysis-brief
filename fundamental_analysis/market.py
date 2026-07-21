@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-DISCLAIMER = "Research output - not a recommendation. The reader decides whether to act."
+DISCLAIMER = "Research output — not a recommendation. The reader decides whether to act."
 
 
 @dataclass(frozen=True)

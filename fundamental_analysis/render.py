@@ -1417,7 +1417,7 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
     )
     c.setFillColor(INK)
     c.setFont("BodyBold", 6.2)
-    c.drawString(MARGIN, 11, "Research output - not a recommendation. The reader decides whether to act.")
+    c.drawString(MARGIN, 11, "Research output — not a recommendation. The reader decides whether to act.")
     c.setFillColor(TEAL)
     c.setFont("Mono", 5.8)
     c.drawRightString(PAGE_W - MARGIN, 11, "STOCKCENTRIC / STOCK-ANALYSIS-BRIEF / 01")

@@ -56,4 +56,4 @@ python -m pytest
 
 The suite covers US and India ticker resolution, USD/INR isolation, four- and five-period statements, bank refusal, missing-data failures, deterministic rendering and one-page output dimensions.
 
-Research output - not a recommendation. The reader decides whether to act.
+Research output — not a recommendation. The reader decides whether to act.

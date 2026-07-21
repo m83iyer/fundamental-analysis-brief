@@ -101,6 +101,7 @@ def test_market_resolution_is_explicit_and_unambiguous() -> None:
 
 
 def test_currency_formatting_does_not_leak_markets() -> None:
+    assert DISCLAIMER == "Research output — not a recommendation. The reader decides whether to act."
     assert compact_money(1_500_000_000_000, "INR") == "₹1.50 lakh cr"
     assert compact_money(1_500_000_000_000, "USD") == "$1.50T"
 
