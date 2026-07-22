@@ -25,6 +25,9 @@ PAGE_H = 1125
 EXPORT_W = 1600
 EXPORT_H = 2000
 MARGIN = 36
+HEADER_COMPANY_X = 195
+HEADER_QUOTE_GAP = 72
+HEADER_QUOTE_MAX_WIDTH = 245
 
 BG = HexColor("#EAF4E8")
 SURFACE = HexColor("#F8FBF4")
@@ -264,10 +267,48 @@ def section_title(
     c.drawRightString(x + available_width, y - 4, source.upper())
 
 
-def fit_text(c: canvas.Canvas, text: str, font: str, size: float, max_width: float) -> float:
+def fit_text(c: canvas.Canvas | None, text: str, font: str, size: float, max_width: float) -> float:
     while size > 5 and pdfmetrics.stringWidth(text, font, size) > max_width:
         size -= 0.25
     return size
+
+
+def bounded_single_line(
+    text: str,
+    font: str,
+    preferred_size: float,
+    max_width: float,
+    *,
+    minimum_size: float = 10,
+) -> tuple[str, float]:
+    """Fit one headline without allowing its visual bounds to escape."""
+    size = preferred_size
+    while size > minimum_size and pdfmetrics.stringWidth(text, font, size) > max_width:
+        size -= 0.25
+    if pdfmetrics.stringWidth(text, font, size) <= max_width:
+        return text, size
+    suffix = "..."
+    shortened = text.strip()
+    while shortened and pdfmetrics.stringWidth(shortened + suffix, font, minimum_size) > max_width:
+        shortened = shortened[:-1].rstrip()
+    return (shortened + suffix if shortened else suffix), minimum_size
+
+
+def header_company_layout(company_name: str, quote_text: str) -> tuple[str, float, str, float, float]:
+    """Return collision-free company and quote typography for the navy header."""
+    quote_face = text_font("Display", quote_text)
+    quote_size = fit_text(None, quote_text, quote_face, 40, HEADER_QUOTE_MAX_WIDTH)
+    # Reserve the full quote column even when today's quote is short. This keeps
+    # company-name typography stable across price changes and prevents crowding.
+    quote_left = PAGE_W - MARGIN - HEADER_QUOTE_MAX_WIDTH
+    company_max_width = max(120, quote_left - HEADER_COMPANY_X - HEADER_QUOTE_GAP)
+    company_label, company_size = bounded_single_line(
+        company_name,
+        "BodyBold",
+        19,
+        company_max_width,
+    )
+    return company_label, company_size, quote_face, quote_size, quote_left
 
 
 def wrapped_lines(text: str, font: str, size: float, max_width: float, max_lines: int = 2) -> list[str]:
@@ -1322,9 +1363,12 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
     ticker_font = fit_text(c, display_ticker, "Display", 70, 138)
     c.setFont("Display", ticker_font)
     c.drawString(MARGIN, 1010, display_ticker)
-    company_font = fit_text(c, str(data["company_name"]), "BodyBold", 19, 470)
+    quote_text = f"{_SYMBOL}{current_price:,.2f}"
+    company_label, company_font, quote_face, quote_size, _ = header_company_layout(
+        str(data["company_name"]), quote_text
+    )
     c.setFont("BodyBold", company_font)
-    c.drawString(195, 1040, data["company_name"])
+    c.drawString(HEADER_COMPANY_X, 1040, company_label)
     c.setFillColor(MINT)
     c.setFont("BodyBold", 9)
     c.drawString(
@@ -1352,9 +1396,6 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
     )
 
     c.setFillColor(SURFACE)
-    quote_text = f"{_SYMBOL}{current_price:,.2f}"
-    quote_face = text_font("Display", quote_text)
-    quote_size = fit_text(c, quote_text, quote_face, 40, 245)
     c.setFont(quote_face, quote_size)
     c.drawRightString(PAGE_W - MARGIN, 1037, quote_text)
     c.setFillColor(MINT)

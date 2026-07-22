@@ -14,7 +14,16 @@ import fundamental_analysis.render as render_module
 from fundamental_analysis.analysis import analyze_fundamentals, normalize_statements
 from fundamental_analysis.cli import _clear_previous_failure, _clear_previous_success
 from fundamental_analysis.market import DISCLAIMER, compact_money, resolve_security
-from fundamental_analysis.render import EXPORT_H, EXPORT_W, PAGE_H, PAGE_W, render
+from fundamental_analysis.render import (
+    EXPORT_H,
+    EXPORT_W,
+    HEADER_COMPANY_X,
+    HEADER_QUOTE_GAP,
+    PAGE_H,
+    PAGE_W,
+    header_company_layout,
+    render,
+)
 
 
 def synthetic_statements(currency: str, *, periods: int = 5, financial: bool = False) -> list[dict]:
@@ -117,6 +126,17 @@ def test_renderer_fonts_are_bundled_and_cross_platform() -> None:
     for alias in ("Display", "Body", "BodyBold", "Mono", "Currency", "CurrencyBold", "CurrencyMono"):
         registered = Path(pdfmetrics.getFont(alias).face.filename).resolve()
         assert registered.is_relative_to(font_root)
+
+
+def test_long_company_name_cannot_collide_with_market_quote() -> None:
+    render_module.register_fonts()
+    company = "An Exceptionally Long Global Energy Holdings Corporation With Additional Words"
+    quote = "$9,999.99"
+    label, company_size, quote_face, quote_size, quote_left = header_company_layout(company, quote)
+    company_right = HEADER_COMPANY_X + pdfmetrics.stringWidth(label, "BodyBold", company_size)
+    assert company_right + HEADER_QUOTE_GAP <= quote_left
+    assert company_size >= 10
+    assert label.endswith("...")
 
 
 def test_output_directory_cannot_mix_success_and_failure_states(tmp_path: Path) -> None:
