@@ -28,6 +28,7 @@ MARGIN = 36
 HEADER_COMPANY_X = 195
 HEADER_QUOTE_GAP = 72
 HEADER_QUOTE_MAX_WIDTH = 245
+HEADER_SECONDARY_MAX_WIDTH = 410
 
 BG = HexColor("#EAF4E8")
 SURFACE = HexColor("#F8FBF4")
@@ -608,7 +609,9 @@ def margin_chart(c: canvas.Canvas, data: dict[str, object], x: float, y: float, 
     latest = data["historical_statements"][-1]
     first_year = int(first["year"])
     latest_year = int(latest["year"])
-    section_title(c, x + 15, y + h - 19, w - 30, "03", f"Margin evolution: {fiscal_label(first_year)} to {fiscal_label(latest_year)}", str(data.get("filing_label", "Annual filing")))
+    # Keep the title compact: the date comparison is repeated in the visual and
+    # insight, while the right-aligned filing label must remain unobstructed.
+    section_title(c, x + 15, y + h - 19, w - 30, "03", "Margin evolution", str(data.get("filing_label", "Annual filing")))
     first_revenue = safe_float(first.get("revenue"))
     latest_revenue = safe_float(latest.get("revenue"))
     if first_revenue <= 0 or latest_revenue <= 0:
@@ -1377,7 +1380,6 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
         f"{data.get('exchange', 'US')} / {data.get('currency', 'USD')}  |  FILINGS THROUGH FY{latest['year']}  |  MODEL BUILT {data['generated_at'][:10]}",
     )
     c.setFillColor(SURFACE)
-    c.setFont("BodyBold", 8.6)
     profit_label = yoy_label(safe_float(latest.get("net_income")), previous_profit)
     conversion_label = f"{fcf_conversion * 100:.1f}%" if fcf_conversion is not None else "N/A"
     implied_label = f"{implied_multiple:.1f}x" if implied_multiple is not None else "N/A"
@@ -1389,11 +1391,15 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
         earnings_headline = f"NET {profit_label}"
     else:
         earnings_headline = f"PROFIT {profit_label}"
-    c.drawString(
-        196,
-        988,
-        f"{earnings_headline}  -  FCF CONVERSION {conversion_label}  -  PRICE IMPLIES {implied_label} HISTORICAL GROWTH",
+    secondary_headline = (
+        f"{earnings_headline}  -  FCF CONVERSION {conversion_label}  -  "
+        f"PRICE IMPLIES {implied_label} HISTORICAL GROWTH"
     )
+    c.setFont(
+        "BodyBold",
+        fit_text(None, secondary_headline, "BodyBold", 8.6, HEADER_SECONDARY_MAX_WIDTH),
+    )
+    c.drawString(196, 988, secondary_headline)
 
     c.setFillColor(SURFACE)
     c.setFont(quote_face, quote_size)

@@ -15,12 +15,14 @@ from fundamental_analysis.analysis import analyze_fundamentals, normalize_statem
 from fundamental_analysis.cli import _clear_previous_failure, _clear_previous_success
 from fundamental_analysis.market import DISCLAIMER, compact_money, resolve_security
 from fundamental_analysis.render import (
+    HEADER_SECONDARY_MAX_WIDTH,
     EXPORT_H,
     EXPORT_W,
     HEADER_COMPANY_X,
     HEADER_QUOTE_GAP,
     PAGE_H,
     PAGE_W,
+    fit_text,
     header_company_layout,
     render,
 )
@@ -118,6 +120,19 @@ def test_currency_formatting_does_not_leak_markets() -> None:
     assert compact_money(1_500_000_000_000, "USD") == "$1.50T"
 
 
+def test_methodology_matches_the_public_model_boundary() -> None:
+    methodology = (Path(__file__).resolve().parents[1] / "METHODOLOGY.md").read_text(encoding="utf-8")
+    for statement in (
+        "at least four unique chronological annual statement periods",
+        "capped between -2% and 15%",
+        "25% / 50% / 25% scenario weights",
+        "-10% to 50% ten-year growth interval",
+        "This is an assumption translation",
+        DISCLAIMER,
+    ):
+        assert statement in methodology
+
+
 def test_renderer_fonts_are_bundled_and_cross_platform() -> None:
     font_root = (Path(render_module.__file__).resolve().parent / "fonts").resolve()
     expected = {"DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "DejaVuSansMono.ttf"}
@@ -137,6 +152,13 @@ def test_long_company_name_cannot_collide_with_market_quote() -> None:
     assert company_right + HEADER_QUOTE_GAP <= quote_left
     assert company_size >= 10
     assert label.endswith("...")
+
+
+def test_secondary_headline_stays_out_of_market_cap_column() -> None:
+    render_module.register_fonts()
+    headline = "PROFIT 16.0%  -  FCF CONVERSION 36.0%  -  PRICE IMPLIES 0.4x HISTORICAL GROWTH"
+    size = fit_text(None, headline, "BodyBold", 8.6, HEADER_SECONDARY_MAX_WIDTH)
+    assert pdfmetrics.stringWidth(headline, "BodyBold", size) <= HEADER_SECONDARY_MAX_WIDTH
 
 
 def test_output_directory_cannot_mix_success_and_failure_states(tmp_path: Path) -> None:

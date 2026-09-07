@@ -2,6 +2,12 @@
 
 Turn a US or Indian stock ticker into a sourced one-page investor fact pattern. The output separates reported facts, market observations and declared valuation assumptions. It does not issue a buy, sell or price-target instruction.
 
+## Example: HDFC Bank
+
+![HDFC Bank fundamental brief, refreshed weekly with live market data](examples/hdfcbank/HDFCBANK-NS-fundamental-brief.png)
+
+Banks aren't comparable to an industrial-company DCF, so the valuation panel is suppressed rather than filled in with a misleading number. This example is regenerated weekly by [`.github/workflows/refresh-example.yml`](.github/workflows/refresh-example.yml) against live market data — it is never a stale screenshot.
+
 ## What it produces
 
 - a 900 × 1125 one-page PDF;
