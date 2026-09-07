@@ -1,9 +1,10 @@
 {
-  "as_of": "2026-09-07T03:36:59+00:00",
+  "as_of": "2026-09-07T12:43:30+00:00",
+  "as_of_requested": null,
   "company_name": "HDFC Bank Limited",
   "currency": "INR",
   "currency_symbol": "\u20b9",
-  "current_price": 712.0999755859375,
+  "current_price": 710.5,
   "data_limitations": [
     "Convenient research data; not an exchange-grade point-in-time feed.",
     "Reported periods may be restated by the issuer or provider.",
@@ -24,17 +25,18 @@
       "rev_growth_start": 0.0,
       "tax_rate": 0.2256924421521448,
       "terminal_growth": 0.0,
-      "wacc": 0.0826924494403211
+      "wacc": 0.08267977052279396
     },
     "per_share": null,
     "sensitivity_grid": {}
   },
   "disclaimer": "Research output \u2014 not a recommendation. The reader decides whether to act.",
   "display_ticker": "HDFCBANK",
-  "engine_version": "0.1.0",
+  "engine_version": "0.2.0",
   "exchange": "NSE",
   "filing_label": "Annual report / NSE-BSE filing / Ind AS",
-  "generated_at": "2026-09-07T03:36:59+00:00",
+  "generated_at": "2026-09-07T12:43:30+00:00",
+  "hindsight": null,
   "historical_statements": [
     {
       "_currency": "INR",
@@ -54,6 +56,7 @@
       "lt_debt_current": 1089897500000.0,
       "net_income": 495446900000.0,
       "operating_income": null,
+      "period_end": "2023-03-31",
       "pretax_income": 662381800000.0,
       "revenue": 1205375000000.0,
       "shares": 5587173328.0,
@@ -82,6 +85,7 @@
       "lt_debt_current": 1313737100000.0,
       "net_income": 622656600000.0,
       "operating_income": null,
+      "period_end": "2024-03-31",
       "pretax_income": 705459000000.0,
       "revenue": 1604968500000.0,
       "shares": 7107452428.0,
@@ -110,6 +114,7 @@
       "lt_debt_current": 1306013100000.0,
       "net_income": 673508300000.0,
       "operating_income": null,
+      "period_end": "2025-03-31",
       "pretax_income": 861546200000.0,
       "revenue": 1838641100000.0,
       "shares": 15318868212.0,
@@ -138,6 +143,7 @@
       "lt_debt_current": 1349648400000.0,
       "net_income": 704793400000.0,
       "operating_income": null,
+      "period_end": "2026-03-31",
       "pretax_income": 939027900000.0,
       "revenue": 1925667800000.0,
       "shares": 15406371571.0,
@@ -150,10 +156,13 @@
     }
   ],
   "industry": "Banks - Regional",
-  "input_sha256": "daf351148b159592cf10098fc93e91089628c7d9b2c502311f5493e3a74f61ff",
+  "input_sha256": "c6b91698c7193f2d1ea03612dbacb9a35f24846b24225d118d1e56dbb15ec7f8",
   "limitation": "Bank and financial-company cash flows are not comparable to an industrial-company DCF.",
   "market": "in",
   "market_label": "India",
+  "price_basis": "latest_adjusted_close",
+  "price_mode": "live",
+  "quote_date": "2026-09-07",
   "ratios": {
     "asset_cagr": 0.2689062556299484,
     "asset_turnover": 0.036594909444204696,
@@ -200,6 +209,7 @@
   "sector": "Financial Services",
   "source": "Yahoo Finance via yfinance",
   "source_url": "https://finance.yahoo.com/quote/HDFCBANK.NS",
+  "statement_basis": "as_reported_today",
   "statement_unit_divisor": 10000000.0,
   "statement_unit_label": "\u20b9 cr",
   "status": "limited_fundamental_view",
@@ -210,14 +220,14 @@
     "cost_of_equity": 0.09174,
     "debt_source": "risk_free_plus_declared_spread",
     "erp": 0.06,
-    "market_cap": 10970876819576.982,
+    "market_cap": 10946227001195.5,
     "note": "Declared research assumptions; override before decision use.",
     "risk_free": 0.0675,
     "risk_free_source": "declared_in_market_profile_assumption",
     "tax_rate": 0.2256924421521448,
     "total_debt": 6643640400000.0,
-    "wacc": 0.0826924494403211,
-    "weight_debt": 0.3771684637837351,
-    "weight_equity": 0.6228315362162647
+    "wacc": 0.08267977052279396,
+    "weight_debt": 0.3776970143361321,
+    "weight_equity": 0.6223029856638679
   }
 }
