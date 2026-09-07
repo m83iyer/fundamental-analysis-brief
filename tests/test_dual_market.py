@@ -128,6 +128,8 @@ def test_methodology_matches_the_public_model_boundary() -> None:
         "25% / 50% / 25% scenario weights",
         "-10% to 50% ten-year growth interval",
         "This is an assumption translation",
+        "The dated-price view prices statements as reported today at the split-adjusted close of a past session. "
+        "It is not a point-in-time reconstruction of what was known on that date.",
         DISCLAIMER,
     ):
         assert statement in methodology

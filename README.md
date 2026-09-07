@@ -46,6 +46,18 @@ fundamental-brief RELIANCE.NS --market in \
   --out outputs/reliance-replay
 ```
 
+## Dated-price view
+
+`--as-of YYYY-MM-DD` prices today's filings at the split-adjusted close of a past session. It is **not** a point-in-time reconstruction of what was known on that date — the statements are exactly today's, only the price is dated. The header marks this with a gold "DATED PRICE" banner and a count of how many statement periods postdate the quote.
+
+```bash
+fundamental-brief AAPL --market us --as-of 2021-04-09 --out outputs/aapl-2021
+```
+
+`--as-of` and `--input-bundle` are mutually exclusive; a bundle saved from a dated run replays as dated with `--input-bundle` alone.
+
+Not for: comparing two dates on one page, computing a return or percentage change against the dated price, or any "would have," "missed," "since then," cheaper/dearer, or undervalued/overvalued framing. Run the tool twice and compare the JSON yourself if you want a then-versus-now view — the page never does that comparison for you.
+
 ## Evidence and refusal rules
 
 The default adapter uses Yahoo Finance through `yfinance` for convenient reproducible research inputs. It is not an exchange-grade point-in-time feed. The adapter boundary is deliberately replaceable so licensed data or official filing extractors can feed the same normalized contract.

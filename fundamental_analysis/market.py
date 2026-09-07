@@ -21,6 +21,7 @@ class MarketProfile:
     debt_spread: float
     default_exchange: str
     filing_label: str
+    filing_lag_days: int
 
 
 @dataclass(frozen=True)
@@ -47,6 +48,7 @@ MARKETS = {
         debt_spread=0.015,
         default_exchange="US",
         filing_label="Annual report / SEC filing",
+        filing_lag_days=90,
     ),
     "in": MarketProfile(
         code="in",
@@ -62,6 +64,7 @@ MARKETS = {
         debt_spread=0.02,
         default_exchange="NSE",
         filing_label="Annual report / NSE-BSE filing / Ind AS",
+        filing_lag_days=90,
     ),
 }
 

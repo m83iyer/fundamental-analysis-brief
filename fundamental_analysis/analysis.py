@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
 import pandas as pd
@@ -11,7 +11,7 @@ import pandas as pd
 from .market import DISCLAIMER, Security
 
 
-ENGINE_VERSION = "0.1.0"
+ENGINE_VERSION = "0.2.0"
 MIN_STATEMENT_PERIODS = 4
 MAX_STATEMENT_PERIODS = 5
 
@@ -88,7 +88,11 @@ def normalize_statements(
     by_year: dict[int, dict[str, Any]] = {}
     for column in columns:
         year = _year(column)
-        row: dict[str, Any] = {"year": year, "_currency": currency}
+        row: dict[str, Any] = {
+            "year": year,
+            "_currency": currency,
+            "period_end": pd.Timestamp(column).date().isoformat(),
+        }
         for key, candidates in INCOME_FIELDS.items():
             row[key] = _value(income, column, candidates)
         for key, candidates in BALANCE_FIELDS.items():
@@ -355,6 +359,37 @@ def _valuation(
     return "complete", None, dcf, scenarios, reverse
 
 
+def _compute_hindsight(
+    statements: list[dict[str, Any]], quote_date_str: str, filing_lag_days: int
+) -> dict[str, Any]:
+    """How many of the (as-reported-today) statement periods a filing-lag
+    rule says would NOT yet have been public knowledge on quote_date_str --
+    the honest measure of how much hindsight the dated-price view carries."""
+    quote_date = date.fromisoformat(quote_date_str)
+    lag = timedelta(days=filing_lag_days)
+    count = 0
+    latest_period_end: date | None = None
+    period_end_source = "provider"
+    for row in statements:
+        period_end_raw = row.get("period_end")
+        if period_end_raw:
+            period_end = date.fromisoformat(str(period_end_raw))
+        else:
+            period_end = date(int(row["year"]), 12, 31)
+            period_end_source = "assumed_calendar_year_end"
+        if latest_period_end is None or period_end > latest_period_end:
+            latest_period_end = period_end
+        if period_end + lag > quote_date:
+            count += 1
+    return {
+        "statement_periods_after_quote": count,
+        "latest_statement_period_end": latest_period_end.isoformat() if latest_period_end else None,
+        "filing_lag_days": filing_lag_days,
+        "rule": "period_end + filing_lag_days > quote_date",
+        "period_end_source": period_end_source,
+    }
+
+
 def analyze_fundamentals(
     security: Security,
     *,
@@ -368,6 +403,10 @@ def analyze_fundamentals(
     fetched_at: str,
     source: str,
     source_url: str,
+    price_mode: str = "live",
+    as_of_requested: str | None = None,
+    quote_date: str | None = None,
+    price_basis: str = "latest_adjusted_close",
 ) -> dict[str, Any]:
     if len(statements) < MIN_STATEMENT_PERIODS:
         raise ValueError(f"Insufficient comparable annual statements: {len(statements)}; need {MIN_STATEMENT_PERIODS}")
@@ -429,8 +468,27 @@ def analyze_fundamentals(
         "statements": statements,
         "market_history": market_history,
         "fetched_at": fetched_at,
+        "price_mode": price_mode,
+        "as_of_requested": as_of_requested,
+        "quote_date": quote_date,
     }
     input_hash = hashlib.sha256(json.dumps(fingerprint, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    hindsight = (
+        _compute_hindsight(statements, quote_date, security.profile.filing_lag_days)
+        if price_mode == "dated" and quote_date
+        else None
+    )
+    data_limitations = [
+        "Convenient research data; not an exchange-grade point-in-time feed.",
+        "Reported periods may be restated by the issuer or provider.",
+        "Valuation assumptions are declared model inputs, not forecasts.",
+    ]
+    if price_mode == "dated" and quote_date:
+        data_limitations = [
+            f"Dated-price view: the quote is the split-adjusted close on {quote_date}; "
+            "every statement figure is as reported today, not as known on that date.",
+            *data_limitations,
+        ]
     return {
         "schema_version": "fundamental-analysis-brief-v1",
         "engine_version": ENGINE_VERSION,
@@ -438,6 +496,12 @@ def analyze_fundamentals(
         "limitation": limitation,
         "generated_at": generated_at,
         "as_of": fetched_at,
+        "price_mode": price_mode,
+        "as_of_requested": as_of_requested,
+        "quote_date": quote_date,
+        "price_basis": price_basis,
+        "statement_basis": "as_reported_today",
+        "hindsight": hindsight,
         "input_sha256": input_hash,
         "ticker": security.canonical_ticker,
         "display_ticker": security.display_ticker,
@@ -456,11 +520,7 @@ def analyze_fundamentals(
         "current_price": current_price,
         "source": source,
         "source_url": source_url,
-        "data_limitations": [
-            "Convenient research data; not an exchange-grade point-in-time feed.",
-            "Reported periods may be restated by the issuer or provider.",
-            "Valuation assumptions are declared model inputs, not forecasts.",
-        ],
+        "data_limitations": data_limitations,
         "historical_statements": statements,
         "ratios": ratios,
         "wacc": wacc,

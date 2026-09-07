@@ -24,6 +24,16 @@ The sensitivity grid varies WACC across seven points and terminal growth across 
 
 The reverse DCF does not predict revenue. It searches a -10% to 50% ten-year growth interval for the growth rate that reproduces the timestamped market quote under the same cash-flow, WACC and terminal-growth assumptions. The dashboard compares this model-implied rate with historical revenue CAGR. This is an assumption translation, not a cheap/expensive label, target price or forecast.
 
+## Dated-price view
+
+The dated-price view prices statements as reported today at the split-adjusted close of a past session. It is not a point-in-time reconstruction of what was known on that date.
+
+`--as-of YYYY-MM-DD` re-fetches only the price side of the model: the split-adjusted (not dividend-adjusted) closing price of the nearest trading session on or before that date. Every statement figure stays exactly what it is in live mode — the latest annual filings as reported and restated today. The dated quote is paired with today's diluted share count and today's fundamentals, so market cap, every ratio and both DCF directions (forward and reverse) reflect that mix, never a reconstruction of what a reader would have known on the requested date.
+
+The header names this explicitly (a gold accent, a "DATED PRICE" banner, and a per-fiscal-year count of how many statement periods postdate the quote under a declared 90-day filing-lag rule) so the hybrid nature of every price-dependent number is unmissable, not a footnote. One date per brief: the page never renders two dates' prices together, never computes a return or percentage change between the dated price and any other price, and never uses cheaper, dearer, undervalued, overvalued, would have, missed or since-then language. If a reader wants a then-versus-now comparison, they run the tool twice and compare the JSON themselves — the rendered page does not editorialize across dates.
+
+A trading session unresolved within seven calendar days on or before the requested date fails closed rather than guessing.
+
 ## Refusal rules
 
 The engine fails closed when the quote is invalid, ticker/history metadata disagree, currency does not match, annual periods are insufficient or non-chronological, or the required valuation inputs are absent. It suppresses an industrial-company DCF for banks and financial issuers, for missing diluted shares or capital expenditure, and for non-positive normalized free cash flow.

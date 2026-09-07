@@ -869,6 +869,9 @@ def ratios_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: float, 
     panel(c, x, y, w, h)
     latest = data["historical_statements"][-1]
     latest_year = int(latest["year"])
+    dated = data.get("price_mode") == "dated"
+    quote_date = str(data.get("quote_date") or "")
+    pe_label = f"{quote_date} PRICE / {fiscal_label(latest_year)} EPS" if dated else f"PRICE / {fiscal_label(latest_year)} EPS"
     section_title(c, x + 15, y + h - 19, w - 30, "05", "Decision ratios", f"{fiscal_label(latest_year)} / 10Y")
     price = safe_float(data.get("current_price"))
     shares = safe_float(latest.get("shares"), 0.0)
@@ -891,7 +894,7 @@ def ratios_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: float, 
                 [
                     ("EQUITY / ASSETS", optional_pct(data["ratios"].get("equity_to_assets")), CORAL),
                     ("SHARE COUNT CAGR", optional_pct(data["ratios"].get("shares_cagr")), PLUM),
-                    (f"PRICE / {fiscal_label(latest_year)} EPS", f"{price / eps:.1f}x" if price > 0 and eps > 0 else "N/A", NAVY),
+                    (pe_label, f"{price / eps:.1f}x" if price > 0 and eps > 0 else "N/A", NAVY),
                 ],
             ),
         ]
@@ -910,7 +913,7 @@ def ratios_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: float, 
                 [
                     ("DEBT / EQUITY", optional_multiple(data["ratios"].get("debt_to_equity")), CORAL),
                     ("CURRENT RATIO", optional_multiple(data["ratios"].get("current_ratio")), PLUM),
-                    (f"PRICE / {fiscal_label(latest_year)} EPS", f"{price / eps:.1f}x" if price > 0 and eps > 0 else "N/A", NAVY),
+                    (pe_label, f"{price / eps:.1f}x" if price > 0 and eps > 0 else "N/A", NAVY),
                 ],
             ),
         ]
@@ -1119,6 +1122,10 @@ def valuation_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: floa
     if not comparable:
         unavailable_valuation_panel(c, data, x, y, w, h, reason)
         return
+    dated = data.get("price_mode") == "dated"
+    quote_date = str(data.get("quote_date") or "")
+    quote_noun = f"the {quote_date} quote" if dated else "the current quote"
+    quote_box_label = f"CLOSE {quote_date}" if dated else "MARKET QUOTE"
     panel(c, x, y, w, h)
     section_title(
         c,
@@ -1195,9 +1202,9 @@ def valuation_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: floa
     market_text = money_per_share(market)
     c.setFont(text_font("Display", market_text), 18)
     c.drawCentredString(market_x + 36, market_y + 15, market_text)
-    c.setFillColor(MINT)
-    c.setFont("Mono", 5.2)
-    c.drawCentredString(market_x + 36, market_y + 5, "MARKET QUOTE")
+    c.setFillColor(GOLD if dated else MINT)
+    c.setFont("Mono", fit_text(c, quote_box_label, "Mono", 5.2, 66))
+    c.drawCentredString(market_x + 36, market_y + 5, quote_box_label)
     c.setFillColor(CORAL)
     c.setFont("BodyBold", 6.2)
     market_to_high = f"{market / high:.1f}x BULL CASE" if high else "BULL CASE N/A"
@@ -1207,12 +1214,14 @@ def valuation_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: floa
     c.setLineWidth(1)
     c.line(high_x + 6, axis_y, market_x - 5, market_y + 19)
     c.setDash()
+    quote_phrase = f"the {quote_date} quote" if dated else "the market quote"
+    quote_phrase_cap = f"The {quote_date} quote" if dated else "The market quote"
     if high < market:
-        scenario_insight = f"The {per_share_range(low, high)} model span sits below the {money_per_share(market)} market quote. This is an assumption gap, not a verdict."
+        scenario_insight = f"The {per_share_range(low, high)} model span sits below {quote_phrase} of {money_per_share(market)}. This is an assumption gap, not a verdict."
     elif low > market:
-        scenario_insight = f"The {per_share_range(low, high)} model span sits above the {money_per_share(market)} market quote. This is an assumption gap, not a verdict."
+        scenario_insight = f"The {per_share_range(low, high)} model span sits above {quote_phrase} of {money_per_share(market)}. This is an assumption gap, not a verdict."
     else:
-        scenario_insight = f"The {money_per_share(market)} market quote sits inside the {per_share_range(low, high)} model span. The range reflects assumption sensitivity, not a verdict."
+        scenario_insight = f"{quote_phrase_cap} of {money_per_share(market)} sits inside the {per_share_range(low, high)} model span. The range reflects assumption sensitivity, not a verdict."
     mini_insight(
         c,
         left_x,
@@ -1261,11 +1270,11 @@ def valuation_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: floa
         c.setFont("Mono", 5.1)
         c.drawCentredString(grid_x + column_index * cell_w + (cell_w - 2) / 2, grid_y - 10, pct(float(column)))
     if grid_high < market:
-        sensitivity_insight = f"Across all 25 displayed cases, value ranges from {money_per_share(grid_low)} to {money_per_share(grid_high)}; no cell reaches the current quote."
+        sensitivity_insight = f"Across all 25 displayed cases, value ranges from {money_per_share(grid_low)} to {money_per_share(grid_high)}; no cell reaches {quote_phrase}."
     elif grid_low > market:
-        sensitivity_insight = f"Across all 25 displayed cases, value ranges from {money_per_share(grid_low)} to {money_per_share(grid_high)}; every cell exceeds the current quote."
+        sensitivity_insight = f"Across all 25 displayed cases, value ranges from {money_per_share(grid_low)} to {money_per_share(grid_high)}; every cell exceeds {quote_phrase}."
     else:
-        sensitivity_insight = f"The {money_per_share(market)} market quote falls inside the {per_share_range(grid_low, grid_high)} sensitivity span; assumptions drive the result."
+        sensitivity_insight = f"{quote_phrase_cap} of {money_per_share(market)} falls inside the {per_share_range(grid_low, grid_high)} sensitivity span; assumptions drive the result."
     mini_insight(
         c,
         center_x,
@@ -1306,12 +1315,18 @@ def valuation_panel(c: canvas.Canvas, data: dict[str, object], x: float, y: floa
     base_growth = growth_values[1][1]
     history_multiple = f"{implied / history:.1f}x history" if history else "history comparison N/A"
     base_multiple = f"{implied / base_growth:.1f}x the base case" if base_growth else "base comparison N/A"
+    if dated:
+        history_part = f"{implied / history:.1f}x history" if history else "history comparison N/A"
+        base_part = f"{implied / base_growth:.1f}x base" if base_growth else "base comparison N/A"
+        growth_sentence = f"{quote_date} price implied {pct(implied)} growth: {history_part}, {base_part}."
+    else:
+        growth_sentence = f"Reverse DCF implies {pct(implied)} revenue growth: {history_multiple} and {base_multiple}."
     mini_insight(
         c,
         right_x,
         y + 8,
         right_w,
-        f"Reverse DCF implies {pct(implied)} revenue growth: {history_multiple} and {base_multiple}.",
+        growth_sentence,
     )
 
 
@@ -1352,15 +1367,30 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
     c.setTitle(f"{data.get('display_ticker', data['ticker'])} Investor Decision Dashboard")
     c.setAuthor("stockcentric")
 
+    dated = data.get("price_mode") == "dated"
+    quote_date = str(data.get("quote_date") or "")
+    as_of_requested = data.get("as_of_requested")
+    accent = GOLD if dated else MINT
+
     c.setFillColor(BG)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     c.setFillColor(NAVY)
     c.rect(0, 972, PAGE_W, 153, stroke=0, fill=1)
-    c.setFillColor(MINT)
+    c.setFillColor(accent)
     c.rect(0, 967, PAGE_W, 5, stroke=0, fill=1)
     c.setFillColor(MINT)
     c.setFont("Mono", 9)
     c.drawString(MARGIN, 1091, "STOCKCENTRIC / INVESTOR DECISION DASHBOARD")
+    if dated:
+        pill_text = f"DATED PRICE {quote_date} · NOT A POINT-IN-TIME VIEW"
+        pill_font_size = fit_text(c, pill_text, "Mono", 7.0, 245)
+        pill_w = pdfmetrics.stringWidth(pill_text, "Mono", pill_font_size) + 16
+        pill_x = PAGE_W - MARGIN - pill_w
+        c.setFillColor(GOLD)
+        c.roundRect(pill_x, 1082, pill_w, 13, 6.5, stroke=0, fill=1)
+        c.setFillColor(NAVY)
+        c.setFont("Mono", pill_font_size)
+        c.drawCentredString(pill_x + pill_w / 2, 1085.7, pill_text)
     c.setFillColor(SURFACE)
     display_ticker = str(data.get("display_ticker") or data["ticker"])
     ticker_font = fit_text(c, display_ticker, "Display", 70, 138)
@@ -1374,11 +1404,15 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
     c.drawString(HEADER_COMPANY_X, 1040, company_label)
     c.setFillColor(MINT)
     c.setFont("BodyBold", 9)
-    c.drawString(
-        196,
-        1016,
-        f"{data.get('exchange', 'US')} / {data.get('currency', 'USD')}  |  FILINGS THROUGH FY{latest['year']}  |  MODEL BUILT {data['generated_at'][:10]}",
+    hindsight = data.get("hindsight") or {}
+    periods_after_quote = int(hindsight.get("statement_periods_after_quote") or 0)
+    hindsight_clause = f"  ·  {periods_after_quote} FY AFTER QUOTE" if dated and periods_after_quote else ""
+    filing_line = (
+        f"{data.get('exchange', 'US')} / {data.get('currency', 'USD')}  |  "
+        f"FILINGS THROUGH FY{latest['year']}{hindsight_clause}  |  MODEL BUILT {data['generated_at'][:10]}"
     )
+    c.setFont("BodyBold", fit_text(c, filing_line, "BodyBold", 9, 415))
+    c.drawString(196, 1016, filing_line)
     c.setFillColor(SURFACE)
     profit_label = yoy_label(safe_float(latest.get("net_income")), previous_profit)
     conversion_label = f"{fcf_conversion * 100:.1f}%" if fcf_conversion is not None else "N/A"
@@ -1391,9 +1425,10 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
         earnings_headline = f"NET {profit_label}"
     else:
         earnings_headline = f"PROFIT {profit_label}"
+    price_verb = "IMPLIED" if dated else "IMPLIES"
     secondary_headline = (
         f"{earnings_headline}  -  FCF CONVERSION {conversion_label}  -  "
-        f"PRICE IMPLIES {implied_label} HISTORICAL GROWTH"
+        f"PRICE {price_verb} {implied_label} HISTORICAL GROWTH"
     )
     c.setFont(
         "BodyBold",
@@ -1401,20 +1436,27 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
     )
     c.drawString(196, 988, secondary_headline)
 
-    c.setFillColor(SURFACE)
+    c.setFillColor(GOLD if dated else SURFACE)
     c.setFont(quote_face, quote_size)
     c.drawRightString(PAGE_W - MARGIN, 1037, quote_text)
-    c.setFillColor(MINT)
-    c.setFont("Mono", 7.2)
-    c.drawRightString(PAGE_W - MARGIN, 1013, f"MARKET QUOTE {quote_as_of}")
+    c.setFillColor(accent)
+    if dated and as_of_requested and as_of_requested != quote_date:
+        quote_label = f"CLOSE {quote_date} · REQUESTED {as_of_requested}"
+    elif dated:
+        quote_label = f"CLOSE {quote_date} · DATED PRICE"
+    else:
+        quote_label = f"MARKET QUOTE {quote_as_of}"
+    c.setFont("Mono", fit_text(c, quote_label, "Mono", 7.2, HEADER_QUOTE_MAX_WIDTH))
+    c.drawRightString(PAGE_W - MARGIN, 1013, quote_label)
     market_cap = safe_float(data.get("wacc", {}).get("market_cap"))
     market_cap_text = money_t(market_cap) if market_cap > 0 else "N/A"
-    c.setFillColor(SURFACE)
+    c.setFillColor(GOLD if dated else SURFACE)
     c.setFont(text_font("BodyBold", market_cap_text), 12)
     c.drawRightString(PAGE_W - MARGIN, 987, market_cap_text)
-    c.setFillColor(MINT)
+    c.setFillColor(accent)
     c.setFont("Mono", 6.3)
-    c.drawRightString(PAGE_W - MARGIN, 976, "MARKET CAPITALIZATION")
+    cap_label = f"MARKET CAP · DATED PRICE × {fiscal_label(latest['year'])} SHARES" if dated else "MARKET CAPITALIZATION"
+    c.drawRightString(PAGE_W - MARGIN, 976, cap_label)
 
     ribbon_y = 916
     ribbon_items = [
@@ -1453,7 +1495,8 @@ def render(sidecar: Path, market_history_path: Path, pdf_path: Path, png_path: P
     c.setFont("Body", 5.9)
     filing_label = str(data.get("filing_label") or "Annual filing")
     source_label = str(data.get("source") or market_history.get("source") or "declared research source")
-    c.drawString(MARGIN, 36, f"Sources: {data['company_name']} FY{latest['year']} {filing_label}; {source_label} adjusted history and timestamped quote; deterministic model sidecar.")
+    quote_source_phrase = f"split-adjusted close on {quote_date}" if dated else "timestamped quote"
+    c.drawString(MARGIN, 36, f"Sources: {data['company_name']} FY{latest['year']} {filing_label}; {source_label} adjusted history and {quote_source_phrase}; deterministic model sidecar.")
     assumptions = data.get("dcf", {}).get("assumptions", {})
     c.drawString(
         MARGIN,
