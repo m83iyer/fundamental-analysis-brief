@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-09-07T12:43:30+00:00",
+  "as_of": "2026-09-14T12:58:37+00:00",
   "as_of_requested": null,
   "company_name": "HDFC Bank Limited",
   "currency": "INR",
   "currency_symbol": "\u20b9",
-  "current_price": 710.5,
+  "current_price": 708.25,
   "data_limitations": [
     "Convenient research data; not an exchange-grade point-in-time feed.",
     "Reported periods may be restated by the issuer or provider.",
@@ -25,7 +25,7 @@
       "rev_growth_start": 0.0,
       "tax_rate": 0.2256924421521448,
       "terminal_growth": 0.0,
-      "wacc": 0.08267977052279396
+      "wacc": 0.08266188028034083
     },
     "per_share": null,
     "sensitivity_grid": {}
@@ -35,7 +35,7 @@
   "engine_version": "0.2.0",
   "exchange": "NSE",
   "filing_label": "Annual report / NSE-BSE filing / Ind AS",
-  "generated_at": "2026-09-07T12:43:30+00:00",
+  "generated_at": "2026-09-14T12:58:37+00:00",
   "hindsight": null,
   "historical_statements": [
     {
@@ -156,13 +156,13 @@
     }
   ],
   "industry": "Banks - Regional",
-  "input_sha256": "c6b91698c7193f2d1ea03612dbacb9a35f24846b24225d118d1e56dbb15ec7f8",
+  "input_sha256": "d68a63b838c35abf07096948b67c37d408134a19c843dbe7a0175c5111e0dde7",
   "limitation": "Bank and financial-company cash flows are not comparable to an industrial-company DCF.",
   "market": "in",
   "market_label": "India",
   "price_basis": "latest_adjusted_close",
   "price_mode": "live",
-  "quote_date": "2026-09-07",
+  "quote_date": "2026-09-11",
   "ratios": {
     "asset_cagr": 0.2689062556299484,
     "asset_turnover": 0.036594909444204696,
@@ -220,14 +220,14 @@
     "cost_of_equity": 0.09174,
     "debt_source": "risk_free_plus_declared_spread",
     "erp": 0.06,
-    "market_cap": 10946227001195.5,
+    "market_cap": 10911562665160.75,
     "note": "Declared research assumptions; override before decision use.",
     "risk_free": 0.0675,
     "risk_free_source": "declared_in_market_profile_assumption",
     "tax_rate": 0.2256924421521448,
     "total_debt": 6643640400000.0,
-    "wacc": 0.08267977052279396,
-    "weight_debt": 0.3776970143361321,
-    "weight_equity": 0.6223029856638679
+    "wacc": 0.08266188028034083,
+    "weight_debt": 0.3784428112474907,
+    "weight_equity": 0.6215571887525093
   }
 }
