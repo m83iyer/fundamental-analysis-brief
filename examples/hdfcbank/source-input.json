@@ -2,26 +2,26 @@
   "as_of_requested": null,
   "beta": 0.404,
   "company_name": "HDFC Bank Limited",
-  "current_price": 708.25,
-  "fetched_at": "2026-09-14T12:58:37+00:00",
+  "current_price": 739.5,
+  "fetched_at": "2026-09-21T12:58:13+00:00",
   "industry": "Banks - Regional",
   "market_history": {
     "currency": "INR",
     "display_ticker": "HDFCBANK",
     "exchange": "NSE",
-    "fetched_at": "2026-09-14T12:58:37+00:00",
+    "fetched_at": "2026-09-21T12:58:13+00:00",
     "market": "in",
     "points": [
       {
-        "adjusted_close": 551.395142,
+        "adjusted_close": 551.395081,
         "date": "2020-10-01"
       },
       {
-        "adjusted_close": 671.266724,
+        "adjusted_close": 671.266663,
         "date": "2020-11-01"
       },
       {
-        "adjusted_close": 669.146912,
+        "adjusted_close": 669.146851,
         "date": "2020-12-01"
       },
       {
@@ -33,19 +33,19 @@
         "date": "2021-02-01"
       },
       {
-        "adjusted_close": 695.865173,
+        "adjusted_close": 695.865234,
         "date": "2021-03-01"
       },
       {
-        "adjusted_close": 657.965637,
+        "adjusted_close": 657.965698,
         "date": "2021-04-01"
       },
       {
-        "adjusted_close": 706.207764,
+        "adjusted_close": 706.207886,
         "date": "2021-05-01"
       },
       {
-        "adjusted_close": 700.86554,
+        "adjusted_close": 700.865601,
         "date": "2021-06-01"
       },
       {
@@ -57,7 +57,7 @@
         "date": "2021-08-01"
       },
       {
-        "adjusted_close": 746.275024,
+        "adjusted_close": 746.275085,
         "date": "2021-09-01"
       },
       {
@@ -65,7 +65,7 @@
         "date": "2021-10-01"
       },
       {
-        "adjusted_close": 698.830139,
+        "adjusted_close": 698.8302,
         "date": "2021-11-01"
       },
       {
@@ -77,15 +77,15 @@
         "date": "2022-01-01"
       },
       {
-        "adjusted_close": 667.340515,
+        "adjusted_close": 667.340576,
         "date": "2022-02-01"
       },
       {
-        "adjusted_close": 687.974915,
+        "adjusted_close": 687.974854,
         "date": "2022-03-01"
       },
       {
-        "adjusted_close": 647.852539,
+        "adjusted_close": 647.8526,
         "date": "2022-04-01"
       },
       {
@@ -97,11 +97,11 @@
         "date": "2022-06-01"
       },
       {
-        "adjusted_close": 678.862793,
+        "adjusted_close": 678.862732,
         "date": "2022-07-01"
       },
       {
-        "adjusted_close": 703.429077,
+        "adjusted_close": 703.429016,
         "date": "2022-08-01"
       },
       {
@@ -125,11 +125,11 @@
         "date": "2023-01-01"
       },
       {
-        "adjusted_close": 757.153076,
+        "adjusted_close": 757.153015,
         "date": "2023-02-01"
       },
       {
-        "adjusted_close": 761.862915,
+        "adjusted_close": 761.862793,
         "date": "2023-03-01"
       },
       {
@@ -149,7 +149,7 @@
         "date": "2023-07-01"
       },
       {
-        "adjusted_close": 752.358704,
+        "adjusted_close": 752.358643,
         "date": "2023-08-01"
       },
       {
@@ -157,7 +157,7 @@
         "date": "2023-09-01"
       },
       {
-        "adjusted_close": 706.899719,
+        "adjusted_close": 706.89978,
         "date": "2023-10-01"
       },
       {
@@ -169,11 +169,11 @@
         "date": "2023-12-01"
       },
       {
-        "adjusted_close": 700.221008,
+        "adjusted_close": 700.220947,
         "date": "2024-01-01"
       },
       {
-        "adjusted_close": 671.901978,
+        "adjusted_close": 671.901855,
         "date": "2024-02-01"
       },
       {
@@ -181,11 +181,11 @@
         "date": "2024-03-01"
       },
       {
-        "adjusted_close": 727.774048,
+        "adjusted_close": 727.773987,
         "date": "2024-04-01"
       },
       {
-        "adjusted_close": 743.26886,
+        "adjusted_close": 743.268799,
         "date": "2024-05-01"
       },
       {
@@ -193,11 +193,11 @@
         "date": "2024-06-01"
       },
       {
-        "adjusted_close": 784.131531,
+        "adjusted_close": 784.13147,
         "date": "2024-07-01"
       },
       {
-        "adjusted_close": 794.395691,
+        "adjusted_close": 794.395752,
         "date": "2024-08-01"
       },
       {
@@ -205,15 +205,15 @@
         "date": "2024-09-01"
       },
       {
-        "adjusted_close": 842.343811,
+        "adjusted_close": 842.343872,
         "date": "2024-10-01"
       },
       {
-        "adjusted_close": 871.63208,
+        "adjusted_close": 871.632019,
         "date": "2024-11-01"
       },
       {
-        "adjusted_close": 860.372925,
+        "adjusted_close": 860.372864,
         "date": "2024-12-01"
       },
       {
@@ -221,11 +221,11 @@
         "date": "2025-01-01"
       },
       {
-        "adjusted_close": 840.74231,
+        "adjusted_close": 840.742371,
         "date": "2025-02-01"
       },
       {
-        "adjusted_close": 887.234497,
+        "adjusted_close": 887.234558,
         "date": "2025-03-01"
       },
       {
@@ -233,7 +233,7 @@
         "date": "2025-04-01"
       },
       {
-        "adjusted_close": 943.869629,
+        "adjusted_close": 943.86969,
         "date": "2025-05-01"
       },
       {
@@ -297,7 +297,7 @@
         "date": "2026-08-01"
       },
       {
-        "adjusted_close": 708.25,
+        "adjusted_close": 739.5,
         "date": "2026-09-01"
       }
     ],
@@ -308,7 +308,7 @@
   },
   "price_basis": "latest_adjusted_close",
   "price_mode": "live",
-  "quote_date": "2026-09-11",
+  "quote_date": "2026-09-21",
   "sector": "Financial Services",
   "source": "Yahoo Finance via yfinance",
   "source_url": "https://finance.yahoo.com/quote/HDFCBANK.NS",
