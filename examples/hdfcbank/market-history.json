@@ -2,27 +2,27 @@
   "currency": "INR",
   "display_ticker": "HDFCBANK",
   "exchange": "NSE",
-  "fetched_at": "2026-10-05T14:52:51+00:00",
+  "fetched_at": "2026-10-12T07:08:31+00:00",
   "market": "in",
   "points": [
     {
-      "adjusted_close": 671.266602,
+      "adjusted_close": 671.266663,
       "date": "2020-11-01"
     },
     {
-      "adjusted_close": 669.146912,
+      "adjusted_close": 669.146851,
       "date": "2020-12-01"
     },
     {
-      "adjusted_close": 647.809387,
+      "adjusted_close": 647.809448,
       "date": "2021-01-01"
     },
     {
-      "adjusted_close": 714.849915,
+      "adjusted_close": 714.849976,
       "date": "2021-02-01"
     },
     {
-      "adjusted_close": 695.865234,
+      "adjusted_close": 695.865295,
       "date": "2021-03-01"
     },
     {
@@ -34,15 +34,15 @@
       "date": "2021-05-01"
     },
     {
-      "adjusted_close": 700.86554,
+      "adjusted_close": 700.865479,
       "date": "2021-06-01"
     },
     {
-      "adjusted_close": 667.434143,
+      "adjusted_close": 667.434082,
       "date": "2021-07-01"
     },
     {
-      "adjusted_close": 739.935059,
+      "adjusted_close": 739.93512,
       "date": "2021-08-01"
     },
     {
@@ -54,19 +54,19 @@
       "date": "2021-10-01"
     },
     {
-      "adjusted_close": 698.8302,
+      "adjusted_close": 698.830139,
       "date": "2021-11-01"
     },
     {
-      "adjusted_close": 692.209412,
+      "adjusted_close": 692.209351,
       "date": "2021-12-01"
     },
     {
-      "adjusted_close": 695.157227,
+      "adjusted_close": 695.157104,
       "date": "2022-01-01"
     },
     {
-      "adjusted_close": 667.340637,
+      "adjusted_close": 667.340515,
       "date": "2022-02-01"
     },
     {
@@ -82,7 +82,7 @@
       "date": "2022-05-01"
     },
     {
-      "adjusted_close": 638.061035,
+      "adjusted_close": 638.060974,
       "date": "2022-06-01"
     },
     {
@@ -94,15 +94,15 @@
       "date": "2022-08-01"
     },
     {
-      "adjusted_close": 672.780396,
+      "adjusted_close": 672.780334,
       "date": "2022-09-01"
     },
     {
-      "adjusted_close": 708.446472,
+      "adjusted_close": 708.446533,
       "date": "2022-10-01"
     },
     {
-      "adjusted_close": 761.342163,
+      "adjusted_close": 761.342041,
       "date": "2022-11-01"
     },
     {
@@ -118,7 +118,7 @@
       "date": "2023-02-01"
     },
     {
-      "adjusted_close": 761.862732,
+      "adjusted_close": 761.862854,
       "date": "2023-03-01"
     },
     {
@@ -126,11 +126,11 @@
       "date": "2023-04-01"
     },
     {
-      "adjusted_close": 771.222229,
+      "adjusted_close": 771.222107,
       "date": "2023-05-01"
     },
     {
-      "adjusted_close": 814.574524,
+      "adjusted_close": 814.574585,
       "date": "2023-06-01"
     },
     {
@@ -138,7 +138,7 @@
       "date": "2023-07-01"
     },
     {
-      "adjusted_close": 752.358643,
+      "adjusted_close": 752.358704,
       "date": "2023-08-01"
     },
     {
@@ -146,15 +146,15 @@
       "date": "2023-09-01"
     },
     {
-      "adjusted_close": 706.899841,
+      "adjusted_close": 706.89978,
       "date": "2023-10-01"
     },
     {
-      "adjusted_close": 746.302246,
+      "adjusted_close": 746.302307,
       "date": "2023-11-01"
     },
     {
-      "adjusted_close": 818.332764,
+      "adjusted_close": 818.332825,
       "date": "2023-12-01"
     },
     {
@@ -170,11 +170,11 @@
       "date": "2024-03-01"
     },
     {
-      "adjusted_close": 727.773987,
+      "adjusted_close": 727.774048,
       "date": "2024-04-01"
     },
     {
-      "adjusted_close": 743.268799,
+      "adjusted_close": 743.26886,
       "date": "2024-05-01"
     },
     {
@@ -182,7 +182,7 @@
       "date": "2024-06-01"
     },
     {
-      "adjusted_close": 784.131531,
+      "adjusted_close": 784.13147,
       "date": "2024-07-01"
     },
     {
@@ -198,7 +198,7 @@
       "date": "2024-10-01"
     },
     {
-      "adjusted_close": 871.632019,
+      "adjusted_close": 871.63208,
       "date": "2024-11-01"
     },
     {
@@ -210,11 +210,11 @@
       "date": "2025-01-01"
     },
     {
-      "adjusted_close": 840.742371,
+      "adjusted_close": 840.74231,
       "date": "2025-02-01"
     },
     {
-      "adjusted_close": 887.234497,
+      "adjusted_close": 887.234558,
       "date": "2025-03-01"
     },
     {
@@ -290,7 +290,7 @@
       "date": "2026-09-01"
     },
     {
-      "adjusted_close": 704.799988,
+      "adjusted_close": 707.099976,
       "date": "2026-10-01"
     }
   ],
