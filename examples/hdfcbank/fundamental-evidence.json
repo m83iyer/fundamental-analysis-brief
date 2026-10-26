@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-10-19T06:58:50+00:00",
+  "as_of": "2026-10-26T07:00:11+00:00",
   "as_of_requested": null,
   "company_name": "HDFC Bank Limited",
   "currency": "INR",
   "currency_symbol": "\u20b9",
-  "current_price": 710.9500122070312,
+  "current_price": 687.7999877929688,
   "data_limitations": [
     "Convenient research data; not an exchange-grade point-in-time feed.",
     "Reported periods may be restated by the issuer or provider.",
@@ -25,7 +25,7 @@
       "rev_growth_start": 0.0,
       "tax_rate": 0.2256924421521448,
       "terminal_growth": 0.0,
-      "wacc": 0.08298211707221459
+      "wacc": 0.08279100706791807
     },
     "per_share": null,
     "sensitivity_grid": {}
@@ -35,7 +35,7 @@
   "engine_version": "0.2.0",
   "exchange": "NSE",
   "filing_label": "Annual report / NSE-BSE filing / Ind AS",
-  "generated_at": "2026-10-19T06:58:50+00:00",
+  "generated_at": "2026-10-26T07:00:11+00:00",
   "hindsight": null,
   "historical_statements": [
     {
@@ -87,7 +87,7 @@
       "operating_income": null,
       "period_end": "2024-03-31",
       "pretax_income": 705459000000.0,
-      "revenue": 1604968500000.0,
+      "revenue": 1986934300000.0,
       "shares": 7107452428.0,
       "st_borrowings": 1313737100000.0,
       "tax": 77827100000.0,
@@ -116,7 +116,7 @@
       "operating_income": null,
       "period_end": "2025-03-31",
       "pretax_income": 861546200000.0,
-      "revenue": 1838641100000.0,
+      "revenue": 2371508200000.0,
       "shares": 15318868212.0,
       "st_borrowings": 1306013100000.0,
       "tax": 175014900000.0,
@@ -145,7 +145,7 @@
       "operating_income": null,
       "period_end": "2026-03-31",
       "pretax_income": 939027900000.0,
-      "revenue": 1925667800000.0,
+      "revenue": 2495617500000.0,
       "shares": 15406371571.0,
       "st_borrowings": 1349648400000.0,
       "tax": 211931500000.0,
@@ -156,28 +156,28 @@
     }
   ],
   "industry": "Banks - Regional",
-  "input_sha256": "93fae74a4eb4c457d5daba434daa102ab96ebc9d82b3007ecf676efc41a8218d",
+  "input_sha256": "f71202d049c31b6112bd672ba76fe022fe5177266682baf6eac0e4eedaf40ed7",
   "limitation": "Bank and financial-company cash flows are not comparable to an industrial-company DCF.",
   "market": "in",
   "market_label": "India",
   "price_basis": "latest_adjusted_close",
   "price_mode": "live",
-  "quote_date": "2026-10-19",
+  "quote_date": "2026-10-26",
   "ratios": {
     "asset_cagr": 0.2689062556299484,
-    "asset_turnover": 0.036594909444204696,
+    "asset_turnover": 0.04742609105260654,
     "current_ratio": null,
     "debt_to_equity": 0.8134343829261803,
     "eps": 45.75,
     "eps_cagr": -0.19797395587817435,
     "equity_to_assets": 0.15521114409089454,
-    "fcf_margin": 0.5534580263532475,
+    "fcf_margin": 0.4270591546981859,
     "fcf_per_share": 69.17763180567133,
     "gross_margin": null,
     "net_debt_to_equity": 0.3664529853310889,
-    "net_margin": 0.36599947301398505,
+    "net_margin": 0.282412428988016,
     "operating_margin": null,
-    "revenue_cagr": 0.16901404653643337,
+    "revenue_cagr": 0.27453553237474115,
     "roa": 0.013393717571573425,
     "roe": 0.0862935303390961,
     "shares_cagr": 0.4022843090685766
@@ -220,14 +220,14 @@
     "cost_of_equity": 0.09222,
     "debt_source": "risk_free_plus_declared_spread",
     "erp": 0.06,
-    "market_cap": 10953160056468.51,
+    "market_cap": 10596502178467.74,
     "note": "Declared research assumptions; override before decision use.",
     "risk_free": 0.0675,
     "risk_free_source": "declared_in_market_profile_assumption",
     "tax_rate": 0.2256924421521448,
     "total_debt": 6643640400000.0,
-    "wacc": 0.08298211707221459,
-    "weight_debt": 0.37754820351774954,
-    "weight_equity": 0.6224517964822506
+    "wacc": 0.08279100706791807,
+    "weight_debt": 0.38535878515863586,
+    "weight_equity": 0.6146412148413641
   }
 }

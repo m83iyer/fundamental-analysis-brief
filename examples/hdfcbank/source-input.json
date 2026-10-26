@@ -2,14 +2,14 @@
   "as_of_requested": null,
   "beta": 0.412,
   "company_name": "HDFC Bank Limited",
-  "current_price": 710.9500122070312,
-  "fetched_at": "2026-10-19T06:58:50+00:00",
+  "current_price": 687.7999877929688,
+  "fetched_at": "2026-10-26T07:00:11+00:00",
   "industry": "Banks - Regional",
   "market_history": {
     "currency": "INR",
     "display_ticker": "HDFCBANK",
     "exchange": "NSE",
-    "fetched_at": "2026-10-19T06:58:50+00:00",
+    "fetched_at": "2026-10-26T07:00:11+00:00",
     "market": "in",
     "points": [
       {
@@ -25,15 +25,15 @@
         "date": "2021-01-01"
       },
       {
-        "adjusted_close": 714.849976,
+        "adjusted_close": 714.849854,
         "date": "2021-02-01"
       },
       {
-        "adjusted_close": 695.865295,
+        "adjusted_close": 695.865173,
         "date": "2021-03-01"
       },
       {
-        "adjusted_close": 657.965759,
+        "adjusted_close": 657.965698,
         "date": "2021-04-01"
       },
       {
@@ -41,19 +41,19 @@
         "date": "2021-05-01"
       },
       {
-        "adjusted_close": 700.865601,
+        "adjusted_close": 700.86554,
         "date": "2021-06-01"
       },
       {
-        "adjusted_close": 667.434021,
+        "adjusted_close": 667.434143,
         "date": "2021-07-01"
       },
       {
-        "adjusted_close": 739.935181,
+        "adjusted_close": 739.934998,
         "date": "2021-08-01"
       },
       {
-        "adjusted_close": 746.274963,
+        "adjusted_close": 746.275024,
         "date": "2021-09-01"
       },
       {
@@ -61,11 +61,11 @@
         "date": "2021-10-01"
       },
       {
-        "adjusted_close": 698.830139,
+        "adjusted_close": 698.830261,
         "date": "2021-11-01"
       },
       {
-        "adjusted_close": 692.209351,
+        "adjusted_close": 692.209412,
         "date": "2021-12-01"
       },
       {
@@ -77,11 +77,11 @@
         "date": "2022-02-01"
       },
       {
-        "adjusted_close": 687.974915,
+        "adjusted_close": 687.974854,
         "date": "2022-03-01"
       },
       {
-        "adjusted_close": 647.852539,
+        "adjusted_close": 647.8526,
         "date": "2022-04-01"
       },
       {
@@ -97,27 +97,27 @@
         "date": "2022-07-01"
       },
       {
-        "adjusted_close": 703.429016,
+        "adjusted_close": 703.429077,
         "date": "2022-08-01"
       },
       {
-        "adjusted_close": 672.780334,
+        "adjusted_close": 672.780396,
         "date": "2022-09-01"
       },
       {
-        "adjusted_close": 708.446411,
+        "adjusted_close": 708.446472,
         "date": "2022-10-01"
       },
       {
-        "adjusted_close": 761.34198,
+        "adjusted_close": 761.342102,
         "date": "2022-11-01"
       },
       {
-        "adjusted_close": 770.66687,
+        "adjusted_close": 770.666931,
         "date": "2022-12-01"
       },
       {
-        "adjusted_close": 758.999023,
+        "adjusted_close": 758.999146,
         "date": "2023-01-01"
       },
       {
@@ -125,11 +125,11 @@
         "date": "2023-02-01"
       },
       {
-        "adjusted_close": 761.862793,
+        "adjusted_close": 761.862854,
         "date": "2023-03-01"
       },
       {
-        "adjusted_close": 798.806885,
+        "adjusted_close": 798.806946,
         "date": "2023-04-01"
       },
       {
@@ -145,7 +145,7 @@
         "date": "2023-07-01"
       },
       {
-        "adjusted_close": 752.358704,
+        "adjusted_close": 752.358643,
         "date": "2023-08-01"
       },
       {
@@ -153,7 +153,7 @@
         "date": "2023-09-01"
       },
       {
-        "adjusted_close": 706.89978,
+        "adjusted_close": 706.899719,
         "date": "2023-10-01"
       },
       {
@@ -165,19 +165,19 @@
         "date": "2023-12-01"
       },
       {
-        "adjusted_close": 700.221008,
+        "adjusted_close": 700.220947,
         "date": "2024-01-01"
       },
       {
-        "adjusted_close": 671.901917,
+        "adjusted_close": 671.901855,
         "date": "2024-02-01"
       },
       {
-        "adjusted_close": 693.20697,
+        "adjusted_close": 693.207031,
         "date": "2024-03-01"
       },
       {
-        "adjusted_close": 727.774048,
+        "adjusted_close": 727.773987,
         "date": "2024-04-01"
       },
       {
@@ -193,7 +193,7 @@
         "date": "2024-07-01"
       },
       {
-        "adjusted_close": 794.395752,
+        "adjusted_close": 794.395691,
         "date": "2024-08-01"
       },
       {
@@ -201,7 +201,7 @@
         "date": "2024-09-01"
       },
       {
-        "adjusted_close": 842.343872,
+        "adjusted_close": 842.343811,
         "date": "2024-10-01"
       },
       {
@@ -209,7 +209,7 @@
         "date": "2024-11-01"
       },
       {
-        "adjusted_close": 860.372864,
+        "adjusted_close": 860.372925,
         "date": "2024-12-01"
       },
       {
@@ -297,7 +297,7 @@
         "date": "2026-09-01"
       },
       {
-        "adjusted_close": 710.950012,
+        "adjusted_close": 687.799988,
         "date": "2026-10-01"
       }
     ],
@@ -308,7 +308,7 @@
   },
   "price_basis": "latest_adjusted_close",
   "price_mode": "live",
-  "quote_date": "2026-10-19",
+  "quote_date": "2026-10-26",
   "sector": "Financial Services",
   "source": "Yahoo Finance via yfinance",
   "source_url": "https://finance.yahoo.com/quote/HDFCBANK.NS",
@@ -362,7 +362,7 @@
       "operating_income": null,
       "period_end": "2024-03-31",
       "pretax_income": 705459000000.0,
-      "revenue": 1604968500000.0,
+      "revenue": 1986934300000.0,
       "shares": 7107452428.0,
       "st_borrowings": 1313737100000.0,
       "tax": 77827100000.0,
@@ -391,7 +391,7 @@
       "operating_income": null,
       "period_end": "2025-03-31",
       "pretax_income": 861546200000.0,
-      "revenue": 1838641100000.0,
+      "revenue": 2371508200000.0,
       "shares": 15318868212.0,
       "st_borrowings": 1306013100000.0,
       "tax": 175014900000.0,
@@ -420,7 +420,7 @@
       "operating_income": null,
       "period_end": "2026-03-31",
       "pretax_income": 939027900000.0,
-      "revenue": 1925667800000.0,
+      "revenue": 2495617500000.0,
       "shares": 15406371571.0,
       "st_borrowings": 1349648400000.0,
       "tax": 211931500000.0,
