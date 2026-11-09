@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-11-02T06:39:32+00:00",
+  "as_of": "2026-11-09T06:39:54+00:00",
   "as_of_requested": null,
   "company_name": "HDFC Bank Limited",
   "currency": "INR",
   "currency_symbol": "\u20b9",
-  "current_price": 691.0999755859375,
+  "current_price": 795.9000244140625,
   "data_limitations": [
     "Convenient research data; not an exchange-grade point-in-time feed.",
     "Reported periods may be restated by the issuer or provider.",
@@ -25,7 +25,7 @@
       "rev_growth_start": 0.0,
       "tax_rate": 0.2256924421521448,
       "terminal_growth": 0.0,
-      "wacc": 0.08281873122285643
+      "wacc": 0.08292115046546401
     },
     "per_share": null,
     "sensitivity_grid": {}
@@ -35,7 +35,7 @@
   "engine_version": "0.2.0",
   "exchange": "NSE",
   "filing_label": "Annual report / NSE-BSE filing / Ind AS",
-  "generated_at": "2026-11-02T06:39:32+00:00",
+  "generated_at": "2026-11-09T06:39:54+00:00",
   "hindsight": null,
   "historical_statements": [
     {
@@ -156,13 +156,13 @@
     }
   ],
   "industry": "Banks - Regional",
-  "input_sha256": "ac67591de52ba291936525f15a6c9c610781bab9321a53095d725cfdc7c04465",
+  "input_sha256": "e9ad466c93e6c7387f05f5f7194ce398cbf69f6ba360a0da460a7f288cc8c967",
   "limitation": "Bank and financial-company cash flows are not comparable to an industrial-company DCF.",
   "market": "in",
   "market_label": "India",
   "price_basis": "latest_adjusted_close",
   "price_mode": "live",
-  "quote_date": "2026-11-02",
+  "quote_date": "2026-11-09",
   "ratios": {
     "asset_cagr": 0.2689062556299484,
     "asset_turnover": 0.04742609105260654,
@@ -215,19 +215,19 @@
   "status": "limited_fundamental_view",
   "ticker": "HDFCBANK.NS",
   "wacc": {
-    "beta": 0.412,
+    "beta": 0.394,
     "cost_of_debt": 0.06775191131168734,
-    "cost_of_equity": 0.09222,
+    "cost_of_equity": 0.09114,
     "debt_source": "risk_free_plus_declared_spread",
     "erp": 0.06,
-    "market_cap": 10647343016585.982,
+    "market_cap": 12261931509491.018,
     "note": "Declared research assumptions; override before decision use.",
     "risk_free": 0.0675,
     "risk_free_source": "declared_in_market_profile_assumption",
     "tax_rate": 0.2256924421521448,
     "total_debt": 6643640400000.0,
-    "wacc": 0.08281873122285643,
-    "weight_debt": 0.3842257111661584,
-    "weight_equity": 0.6157742888338417
+    "wacc": 0.08292115046546401,
+    "weight_debt": 0.3514117653676875,
+    "weight_equity": 0.6485882346323126
   }
 }
